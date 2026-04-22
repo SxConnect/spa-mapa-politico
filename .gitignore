@@ -1,0 +1,37 @@
+# Documentação local
+docs/
+
+# Arquivos de ambiente com credenciais
+.env
+.env.local
+.env.production
+.env.development
+.env.docker
+*.env
+
+# Node modules
+node_modules/
+
+# Build outputs
+dist/
+build/
+
+# Logs
+*.log
+logs/
+
+# Cache
+.cache/
+.vite/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Backup data
+data/backup/
+backup-pt-exemplo/

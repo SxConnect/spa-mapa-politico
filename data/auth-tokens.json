@@ -1,0 +1,22 @@
+{
+  "tokens": [
+    {
+      "token": "1cf1e29e6368711b3a5053d49e1246b18dd467343842e7d65a9075eb409643dd",
+      "user": {
+        "name": "Silvano Xavier",
+        "email": "silvanoxavierpro@gmail.com",
+        "whatsapp": "5521979489418"
+      },
+      "createdAt": 1774060809136,
+      "used": true
+    }
+  ],
+  "users": [
+    {
+      "name": "Silvano Xavier",
+      "email": "silvanoxavierpro@gmail.com",
+      "whatsapp": "5521979489418",
+      "lastAccess": 1774060809136
+    }
+  ]
+}

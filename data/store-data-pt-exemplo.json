@@ -1,0 +1,82 @@
+{
+    "config": {
+        "projectName": "Voto Consciente - PT 13",
+        "logo": "/uploads/logo-pt.png",
+        "headerImage": "",
+        "mapTitle": "Conheça os Candidatos do PT",
+        "primaryColor": "#E30613",
+        "secondaryColor": "#FFFFFF",
+        "mapColorEmpty": "#FFE5E7",
+        "mapColorFilled": "#E30613",
+        "mapColorHover": "#B00510",
+        "aboutText": "Conheça os candidatos do Partido dos Trabalhadores (PT) e vote com consciência. O PT é um partido político brasileiro de centro-esquerda fundado em 1980, comprometido com a justiça social, a democracia e os direitos dos trabalhadores.",
+        "footerText": "© 2026 Voto Consciente - PT 13 | Partido dos Trabalhadores",
+        "footerContact": "contato@pt.org.br",
+        "theme": "light"
+    },
+    "candidates": [
+        {
+            "id": "lula-presidente",
+            "name": "Luiz Inácio Lula da Silva (Lula)",
+            "photo": "/uploads/lula-oficial.jpg",
+            "partyName": "Partido dos Trabalhadores",
+            "partyAbbr": "PT",
+            "campaignNumber": "13",
+            "cargo": "presidente",
+            "state": "SP",
+            "municipality": "São Paulo",
+            "description": "Luiz Inácio Lula da Silva, conhecido como Lula, é um político, ex-sindicalista e ex-metalúrgico brasileiro. Foi o 35º presidente do Brasil entre 2003 e 2010, e atualmente exerce seu terceiro mandato desde 2023. Nascido em Caetés, Pernambuco, Lula migrou para São Paulo ainda criança. Trabalhou como torneiro mecânico e se tornou líder sindical nos anos 1970, sendo um dos fundadores do Partido dos Trabalhadores em 1980. Durante seus dois primeiros mandatos presidenciais, implementou programas sociais como o Bolsa Família, que ajudaram a reduzir significativamente a pobreza e a desigualdade no Brasil.\n\nPropostas:\n• Combate à fome e à pobreza através de programas sociais\n• Fortalecimento do SUS e ampliação do acesso à saúde\n• Valorização da educação pública em todos os níveis\n• Geração de empregos e desenvolvimento econômico sustentável\n• Proteção do meio ambiente e combate ao desmatamento\n• Fortalecimento da democracia e dos direitos humanos",
+            "socialLinks": {
+                "instagram": "",
+                "facebook": "",
+                "twitter": "",
+                "youtube": ""
+            },
+            "websiteUrl": "",
+            "createdAt": "2026-03-22T18:00:00.000Z",
+            "active": true
+        },
+        {
+            "id": "celso-pancera-senador",
+            "name": "Celso Pancera",
+            "photo": "/uploads/celso-pancera.jpg",
+            "partyName": "Partido dos Trabalhadores",
+            "partyAbbr": "PT",
+            "campaignNumber": "13",
+            "cargo": "senador",
+            "state": "SP",
+            "municipality": "",
+            "description": "Celso Pancera é um político brasileiro filiado ao Partido dos Trabalhadores. Com uma trajetória marcada pela defesa dos direitos dos trabalhadores e pela luta por justiça social, Pancera tem se destacado por seu compromisso com as causas populares. Sua atuação política é pautada pela transparência, ética e pelo diálogo constante com a população. Ao longo de sua carreira, tem trabalhado incansavelmente para representar os interesses do povo brasileiro no Senado Federal.\n\nPropostas:\n• Defesa dos direitos trabalhistas e previdenciários\n• Investimento em educação pública de qualidade\n• Fortalecimento do Sistema Único de Saúde (SUS)\n• Combate à corrupção e transparência na gestão pública\n• Desenvolvimento regional e geração de empregos\n• Proteção dos direitos das minorias e grupos vulneráveis",
+            "socialLinks": {
+                "instagram": "",
+                "facebook": "",
+                "twitter": "",
+                "youtube": ""
+            },
+            "websiteUrl": "",
+            "createdAt": "2026-03-22T18:00:00.000Z",
+            "active": true
+        },
+        {
+            "id": "quaqua-deputado-federal",
+            "name": "Washington Quaquá",
+            "photo": "/uploads/quaqua.jpg",
+            "partyName": "Partido dos Trabalhadores",
+            "partyAbbr": "PT",
+            "campaignNumber": "13",
+            "cargo": "deputado-federal",
+            "state": "RJ",
+            "municipality": "Rio de Janeiro",
+            "description": "Washington Quaquá é um político brasileiro do Rio de Janeiro, filiado ao Partido dos Trabalhadores. Conhecido por sua atuação em defesa das políticas sociais e dos direitos da população mais vulnerável, Quaquá tem uma trajetória marcada pelo trabalho comunitário e pela proximidade com as demandas populares. Como deputado federal pelo Rio de Janeiro, tem se dedicado a levar as vozes das comunidades para o Congresso Nacional, lutando por mais investimentos em saúde, educação e infraestrutura para o estado.\n\nPropostas:\n• Ampliação de programas sociais e combate à desigualdade\n• Investimento em infraestrutura e saneamento básico no RJ\n• Melhoria da segurança pública com foco em prevenção\n• Fortalecimento da educação pública e valorização dos professores\n• Acesso universal à saúde de qualidade\n• Geração de empregos e apoio ao empreendedorismo local",
+            "socialLinks": {
+                "instagram": "",
+                "facebook": "",
+                "twitter": "",
+                "youtube": ""
+            },
+            "websiteUrl": "",
+            "createdAt": "2026-03-22T18:00:00.000Z",
+            "active": true
+        }
+    ]
+}

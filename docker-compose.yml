@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  mapa-politico:
+    image: ghcr.io/sxconnect/flixly-mapa-politico:latest
+    container_name: mapa-politico
+    restart: unless-stopped
+    ports:
+      - "8083:80"
+    volumes:
+      - mapa-data:/app/data
+    environment:
+      - NODE_ENV=production
+      - VITE_ADMIN_USERNAME=${ADMIN_USERNAME:-admin}
+      - VITE_ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin123}
+    networks:
+      - mapa-network
+
+volumes:
+  mapa-data:
+    driver: local
+
+networks:
+  mapa-network:
+    driver: bridge
