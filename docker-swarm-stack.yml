@@ -1,0 +1,85 @@
+version: '3.8'
+
+services:
+  mapa-politico:
+    image: ghcr.io/sxconnect/spa-mapa-politico:latest
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+      - HOST=0.0.0.0
+      - ADMIN_USERNAME=admin
+      - ADMIN_PASSWORD=0r5wHmpBmInk
+      - PUBLIC_URL=https://voto-consciente.sxconnect.com.br
+      - DOMAIN=voto-consciente.sxconnect.com.br
+    volumes:
+      - mapa-politico-data:/app/data
+      - mapa-politico-uploads:/app/public/uploads
+    ports:
+      - "3001:3001"
+    networks:
+      - traefik-network
+      - mapa-network
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+      placement:
+        constraints:
+          - node.role == manager
+      labels:
+        # Habilitar Traefik
+        - "traefik.enable=true"
+        - "traefik.docker.network=traefik-network"
+        
+        # Configurar roteador HTTP (redireciona para HTTPS)
+        - "traefik.http.routers.voto-consciente-http.rule=Host(`voto-consciente.sxconnect.com.br`)"
+        - "traefik.http.routers.voto-consciente-http.entrypoints=web"
+        - "traefik.http.routers.voto-consciente-http.middlewares=redirect-to-https"
+        
+        # Configurar roteador HTTPS
+        - "traefik.http.routers.voto-consciente-https.rule=Host(`voto-consciente.sxconnect.com.br`)"
+        - "traefik.http.routers.voto-consciente-https.entrypoints=websecure"
+        - "traefik.http.routers.voto-consciente-https.tls=true"
+        - "traefik.http.routers.voto-consciente-https.tls.certresolver=letsencrypt"
+        - "traefik.http.routers.voto-consciente-https.middlewares=voto-security"
+        
+        # Configurar serviço
+        - "traefik.http.services.voto-consciente-service.loadbalancer.server.port=3001"
+        
+        # Middlewares
+        - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+        - "traefik.http.middlewares.redirect-to-https.redirectscheme.permanent=true"
+        
+        # Headers de segurança
+        - "traefik.http.middlewares.voto-security.headers.accesscontrolallowmethods=GET,POST,PUT,DELETE,OPTIONS"
+        - "traefik.http.middlewares.voto-security.headers.accesscontrolalloworiginlist=https://voto-consciente.sxconnect.com.br"
+        - "traefik.http.middlewares.voto-security.headers.accesscontrolmaxage=100"
+        - "traefik.http.middlewares.voto-security.headers.addvaryheader=true"
+        - "traefik.http.middlewares.voto-security.headers.referrerpolicy=same-origin"
+        - "traefik.http.middlewares.voto-security.headers.framedeny=true"
+        - "traefik.http.middlewares.voto-security.headers.contenttypenosniff=true"
+        - "traefik.http.middlewares.voto-security.headers.browserxssfilter=true"
+        - "traefik.http.middlewares.voto-security.headers.stsincludesubdomains=true"
+        - "traefik.http.middlewares.voto-security.headers.stspreload=true"
+        - "traefik.http.middlewares.voto-security.headers.stsseconds=31536000"
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:3001/health', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+volumes:
+  mapa-politico-data:
+    driver: local
+  mapa-politico-uploads:
+    driver: local
+
+networks:
+  traefik-network:
+    external: true
+  mapa-network:
+    driver: overlay
+    attachable: true

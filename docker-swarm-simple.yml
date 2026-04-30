@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  mapa-politico:
+    image: ghcr.io/sxconnect/spa-mapa-politico:latest
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+      - HOST=0.0.0.0
+      - ADMIN_USERNAME=admin
+      - ADMIN_PASSWORD=0r5wHmpBmInk
+      - PUBLIC_URL=https://voto-consciente.sxconnect.com.br
+      - DOMAIN=voto-consciente.sxconnect.com.br
+    volumes:
+      - mapa-politico-data:/app/data
+      - mapa-politico-uploads:/app/public/uploads
+    ports:
+      - "3001:3001"
+    networks:
+      - mapa-network
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+      placement:
+        constraints:
+          - node.role == manager
+      update_config:
+        parallelism: 1
+        delay: 10s
+        failure_action: rollback
+        order: start-first
+      rollback_config:
+        parallelism: 1
+        delay: 5s
+        failure_action: pause
+        order: stop-first
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:3001/health', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+volumes:
+  mapa-politico-data:
+    driver: local
+  mapa-politico-uploads:
+    driver: local
+
+networks:
+  mapa-network:
+    driver: overlay
+    attachable: true
