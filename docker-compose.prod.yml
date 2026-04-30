@@ -3,7 +3,7 @@ version: '3.8'
 services:
   mapa-politico:
     image: ghcr.io/sxconnect/spa-mapa-politico:latest
-    container_name: mapa-politico
+    container_name: mapa-politico-prod
     restart: unless-stopped
     ports:
       - "8083:3001"
@@ -13,8 +13,9 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=3001
-      - VITE_ADMIN_USERNAME=${ADMIN_USERNAME:-admin}
-      - VITE_ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin123}
+      # Defina suas credenciais de admin aqui ou via variáveis de ambiente
+      - VITE_ADMIN_USERNAME=admin
+      - VITE_ADMIN_PASSWORD=SuaSenhaSegura123!
     networks:
       - mapa-network
     healthcheck:
@@ -23,6 +24,12 @@ services:
       timeout: 10s
       retries: 3
       start_period: 40s
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.mapa-politico.rule=Host(`seu-dominio.com`)"
+      - "traefik.http.routers.mapa-politico.tls=true"
+      - "traefik.http.routers.mapa-politico.tls.certresolver=letsencrypt"
+      - "traefik.http.services.mapa-politico.loadbalancer.server.port=3001"
 
 volumes:
   mapa-data:

@@ -13,8 +13,9 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=3001
-      - VITE_ADMIN_USERNAME=${ADMIN_USERNAME:-admin}
-      - VITE_ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin123}
+      # Configure suas credenciais de admin
+      - VITE_ADMIN_USERNAME=${ADMIN_USERNAME}
+      - VITE_ADMIN_PASSWORD=${ADMIN_PASSWORD}
     networks:
       - mapa-network
     healthcheck:
