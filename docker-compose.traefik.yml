@@ -1,25 +1,24 @@
+# Docker Compose para uso com Traefik
+# Este arquivo assume que você já tem Traefik rodando
+
 version: '3.8'
 
 services:
   mapa-politico:
     image: ghcr.io/sxconnect/spa-mapa-politico:latest
-    container_name: mapa-politico-prod
+    container_name: mapa-politico
     restart: unless-stopped
-    # Remover ports quando usar Traefik (proxy interno)
-    # ports:
-    #   - "8083:3001"
+    # NÃO expor portas quando usar Traefik (comunicação interna)
     volumes:
       - mapa-data:/app/data
       - mapa-uploads:/app/public/uploads
     environment:
       - NODE_ENV=production
       - PORT=3001
-      # Defina suas credenciais de admin aqui ou via variáveis de ambiente
       - VITE_ADMIN_USERNAME=${ADMIN_USERNAME:-admin}
-      - VITE_ADMIN_PASSWORD=${ADMIN_PASSWORD:-SuaSenhaSegura123!}
+      - VITE_ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin123}
     networks:
       - traefik-network
-      - mapa-network
     healthcheck:
       test: ["CMD", "node", "-e", "require('http').get('http://localhost:3001/health', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})"]
       interval: 30s
@@ -27,32 +26,32 @@ services:
       retries: 3
       start_period: 40s
     labels:
-      # Habilitar Traefik
+      # === CONFIGURAÇÃO BÁSICA ===
       - "traefik.enable=true"
-      
-      # Definir rede do Traefik
       - "traefik.docker.network=traefik-network"
       
-      # Configurar roteador HTTP (redireciona para HTTPS)
-      - "traefik.http.routers.mapa-politico-http.rule=Host(`mapa.seudominio.com`)"
-      - "traefik.http.routers.mapa-politico-http.entrypoints=web"
-      - "traefik.http.routers.mapa-politico-http.middlewares=redirect-to-https"
+      # === ROTEADOR HTTP (redireciona para HTTPS) ===
+      - "traefik.http.routers.mapa-http.rule=Host(`mapa.seudominio.com`)"
+      - "traefik.http.routers.mapa-http.entrypoints=web"
+      - "traefik.http.routers.mapa-http.middlewares=redirect-to-https"
       
-      # Configurar roteador HTTPS
-      - "traefik.http.routers.mapa-politico.rule=Host(`mapa.seudominio.com`)"
-      - "traefik.http.routers.mapa-politico.entrypoints=websecure"
-      - "traefik.http.routers.mapa-politico.tls=true"
-      - "traefik.http.routers.mapa-politico.tls.certresolver=letsencrypt"
+      # === ROTEADOR HTTPS ===
+      - "traefik.http.routers.mapa-https.rule=Host(`mapa.seudominio.com`)"
+      - "traefik.http.routers.mapa-https.entrypoints=websecure"
+      - "traefik.http.routers.mapa-https.tls=true"
+      - "traefik.http.routers.mapa-https.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.mapa-https.middlewares=mapa-security"
       
-      # Configurar serviço (porta interna do container)
-      - "traefik.http.services.mapa-politico.loadbalancer.server.port=3001"
+      # === SERVIÇO ===
+      - "traefik.http.services.mapa-service.loadbalancer.server.port=3001"
       
-      # Middleware para redirecionamento HTTPS
+      # === MIDDLEWARES ===
+      # Redirecionamento HTTPS
       - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
       - "traefik.http.middlewares.redirect-to-https.redirectscheme.permanent=true"
       
-      # Middleware de segurança (opcional)
-      - "traefik.http.middlewares.mapa-security.headers.accesscontrolallowmethods=GET,OPTIONS,PUT,POST,DELETE"
+      # Headers de segurança
+      - "traefik.http.middlewares.mapa-security.headers.accesscontrolallowmethods=GET,POST,PUT,DELETE,OPTIONS"
       - "traefik.http.middlewares.mapa-security.headers.accesscontrolalloworiginlist=https://mapa.seudominio.com"
       - "traefik.http.middlewares.mapa-security.headers.accesscontrolmaxage=100"
       - "traefik.http.middlewares.mapa-security.headers.addvaryheader=true"
@@ -60,9 +59,9 @@ services:
       - "traefik.http.middlewares.mapa-security.headers.framedeny=true"
       - "traefik.http.middlewares.mapa-security.headers.contenttypenosniff=true"
       - "traefik.http.middlewares.mapa-security.headers.browserxssfilter=true"
-      
-      # Aplicar middleware de segurança ao roteador HTTPS
-      - "traefik.http.routers.mapa-politico.middlewares=mapa-security"
+      - "traefik.http.middlewares.mapa-security.headers.stsincludesubdomains=true"
+      - "traefik.http.middlewares.mapa-security.headers.stspreload=true"
+      - "traefik.http.middlewares.mapa-security.headers.stsseconds=31536000"
 
 volumes:
   mapa-data:
@@ -71,7 +70,5 @@ volumes:
     driver: local
 
 networks:
-  mapa-network:
-    driver: bridge
   traefik-network:
     external: true
