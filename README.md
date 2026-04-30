@@ -43,7 +43,7 @@ Sistema Single Page Application para divulgação de candidatos políticos com m
 
 1. **Clone o repositório**
 ```bash
-git clone <url-do-repositorio>
+git clone https://github.com/SxConnect/spa-mapa-politico.git
 cd spa-mapa-politico
 ```
 
