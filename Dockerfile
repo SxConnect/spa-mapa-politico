@@ -1,4 +1,4 @@
-# Flixly Template - Restaurante
+# SPA Mapa Político do Brasil
 # Multi-stage build para imagem otimizada
 
 # Stage 1: Build

@@ -56,8 +56,8 @@ export default function AdminPanel() {
             <button
               onClick={() => setActiveTab('candidates')}
               className={`flex items-center gap-2 px-6 py-4 font-medium border-b-2 transition-colors ${activeTab === 'candidates'
-                  ? 'border-blue-600 text-blue-600 dark:text-blue-400'
-                  : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
+                ? 'border-blue-600 text-blue-600 dark:text-blue-400'
+                : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
                 }`}
             >
               <Users size={20} />
@@ -66,8 +66,8 @@ export default function AdminPanel() {
             <button
               onClick={() => setActiveTab('config')}
               className={`flex items-center gap-2 px-6 py-4 font-medium border-b-2 transition-colors ${activeTab === 'config'
-                  ? 'border-blue-600 text-blue-600 dark:text-blue-400'
-                  : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
+                ? 'border-blue-600 text-blue-600 dark:text-blue-400'
+                : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
                 }`}
             >
               <Settings size={20} />
@@ -76,8 +76,8 @@ export default function AdminPanel() {
             <button
               onClick={() => setActiveTab('backup')}
               className={`flex items-center gap-2 px-6 py-4 font-medium border-b-2 transition-colors ${activeTab === 'backup'
-                  ? 'border-blue-600 text-blue-600 dark:text-blue-400'
-                  : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
+                ? 'border-blue-600 text-blue-600 dark:text-blue-400'
+                : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
                 }`}
             >
               Backup
@@ -94,7 +94,7 @@ export default function AdminPanel() {
       </main>
 
       {/* Save Notification */}
-      {showSaveNotification && <SaveNotification />}
+      {showSaveNotification && <SaveNotification show={showSaveNotification} />}
     </div>
   );
 }

@@ -2,11 +2,11 @@ version: '3.8'
 
 services:
   mapa-politico:
-    image: ghcr.io/sxconnect/flixly-mapa-politico:latest
+    build: .
     container_name: mapa-politico
     restart: unless-stopped
     ports:
-      - "8083:80"
+      - "8083:3001"
     volumes:
       - mapa-data:/app/data
     environment:

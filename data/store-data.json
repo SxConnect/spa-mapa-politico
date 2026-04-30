@@ -18,6 +18,7 @@
     {
       "id": "1",
       "name": "João Silva",
+      "fullName": "João Silva dos Santos",
       "photo": "",
       "partyName": "Partido Exemplo A",
       "partyAbbr": "PEA",
@@ -36,6 +37,7 @@
     {
       "id": "2",
       "name": "Maria Santos",
+      "fullName": "Maria Santos da Silva",
       "photo": "",
       "partyName": "Partido Exemplo B",
       "partyAbbr": "PEB",
@@ -53,6 +55,7 @@
     {
       "id": "3",
       "name": "Carlos Oliveira",
+      "fullName": "Carlos Oliveira Pereira",
       "photo": "",
       "partyName": "Partido Exemplo C",
       "partyAbbr": "PEC",
@@ -71,6 +74,7 @@
     {
       "id": "4",
       "name": "Ana Paula Costa",
+      "fullName": "Ana Paula Costa Lima",
       "photo": "",
       "partyName": "Partido Exemplo D",
       "partyAbbr": "PED",

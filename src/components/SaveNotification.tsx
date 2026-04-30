@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import { Check } from 'lucide-react';
 
 interface Props {
-    show: boolean;
+    show?: boolean;
     message?: string;
 }
 
-export default function SaveNotification({ show, message = 'Salvo com sucesso!' }: Props) {
+export default function SaveNotification({ show = false, message = 'Salvo com sucesso!' }: Props) {
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {

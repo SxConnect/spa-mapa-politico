@@ -20,6 +20,7 @@ export const seedCandidates: Candidate[] = [
     {
         id: '1',
         name: 'João Silva',
+        fullName: 'João Silva dos Santos',
         photo: '',
         partyName: 'Partido Exemplo A',
         partyAbbr: 'PEA',
@@ -38,6 +39,7 @@ export const seedCandidates: Candidate[] = [
     {
         id: '2',
         name: 'Maria Santos',
+        fullName: 'Maria Santos da Silva',
         photo: '',
         partyName: 'Partido Exemplo B',
         partyAbbr: 'PEB',
@@ -55,6 +57,7 @@ export const seedCandidates: Candidate[] = [
     {
         id: '3',
         name: 'Carlos Oliveira',
+        fullName: 'Carlos Oliveira Pereira',
         photo: '',
         partyName: 'Partido Exemplo C',
         partyAbbr: 'PEC',
@@ -73,6 +76,7 @@ export const seedCandidates: Candidate[] = [
     {
         id: '4',
         name: 'Ana Paula Costa',
+        fullName: 'Ana Paula Costa Lima',
         photo: '',
         partyName: 'Partido Exemplo D',
         partyAbbr: 'PED',

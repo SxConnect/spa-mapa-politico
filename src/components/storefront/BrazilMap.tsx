@@ -59,7 +59,7 @@ export default function BrazilMap({
             >
                 <title>Mapa do Brasil</title>
 
-                {Brazil.locations.map((location) => {
+                {Brazil.locations.map((location: any) => {
                     const uf = location.id;
                     const ufUpper = uf.toUpperCase();
                     const info = getStateInfo(uf);
